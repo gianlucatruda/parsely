@@ -1,0 +1,3 @@
+#assign 4 to a
+a EQUALS 0 PLUS 5;
+TALK_TO_THE_HAND (sum EQUALS 15 MINUS 023);
