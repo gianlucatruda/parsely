@@ -1,6 +1,7 @@
 
 RESERVED = 'RES'
 INT = 'INT'
+STRING = 'STRING'
 ID = 'ID'
 OP = 'OP'
 COMMENT = 'COMMENT'
@@ -15,6 +16,7 @@ token_exprs = [
     (r'\(',  RESERVED),
     (r'\)',  RESERVED),
     (r';',   ENDL),
+    (r'(\'|")', RESERVED),
     (r'PLUS',  RESERVED),
     (r'MINUS',   RESERVED),
     (r'TIMES',  RESERVED),
@@ -24,4 +26,6 @@ token_exprs = [
     (r'\d+', INT),
     #id must start lowercase
     (r'[a-z][A-Za-z0-9_]*', ID),
+    (r'[^"]*',STRING),
+    (r"[^']*",STRING)
 ]

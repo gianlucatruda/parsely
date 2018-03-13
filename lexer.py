@@ -32,6 +32,20 @@ def lex(data):
 				str = match.group(0)
 				#if its not a whitespace or comment
 				if tag:
+					if(tag == 'RES'):
+						if(str == '"' or str == "'"):
+							state = 0 if state == 1 else 1
+							#we found a string
+							if state == 1:
+								pattern, tag = token_exprs[len(token_exprs)-2] if str == '"' else token_exprs[len(token_exprs)-1]
+								regex = re.compile(pattern)
+								match = regex.match(data, pos+1)
+								str = match.group(0)
+								sub_list.append((str, tag))
+								pos = match.end(0)
+								break
+							if state == 0: 
+								break
 					if(tag == 'INT'):
 						#we want to strip leading zeros except if its '0'
 						if(len(str) > 1):
