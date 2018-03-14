@@ -1,18 +1,14 @@
-import sys
 from sys import *
 import re
-import tokens
+import g4_tokens as tokens
 import collections
+
+# Defines the Token data type used by the lexer and parser
+Token = collections.namedtuple('Token', ['type','value'])
 
 def open_file(filename):
 	data = open(filename, "r").read()
 	return data
-
-def run():
-	open_file(argv[1])
-	data = open_file(argv[1])
-	t_list = lex(data)
-
 
 def lex(data):
 	data = data.split('\n')
@@ -21,9 +17,16 @@ def lex(data):
 	for i in range(len(data)-1):
 		tokenized.append(lexify(data[i], (i+1)))
 
-	for i in range(len(tokenized)):
-		print('line ', i, tokenized[i])
+	# The next few lines convert the token format for parser
+	token_list = []
+	for line in tokenized:
+		if line != []:
+			token_line = []
+			for pair in line:
+				token_line.append(Token(pair[1], pair[0]))
+			token_list.append(token_line)
 
+	return token_list
 
 
 def lexify(data, line_num):
@@ -63,9 +66,8 @@ def lexify(data, line_num):
 						if(len(str) > 1):
 							str = str.lstrip('0')
 					#create a token - text and tag tuple
-					else:
-						token = (str, tag)
-						token_list.append(token)
+					token = (str, tag)
+					token_list.append(token)
 				break
 		if not match:
 			print('Illegal character in line',line_num,'at position',pos,':\n'+ data,'\n'+ ' '*(pos-1), '^')
@@ -73,19 +75,12 @@ def lexify(data, line_num):
 		else:
 			pos = match.end(0)
 
-	# coverts token_list to parser format Token(type='NUM', value='2')
-	Token = collections.namedtuple('Token', ['type','value'])
-	new_tokens = []
-
 	return token_list
 
-	'''
-	for i in token_list:
-		for j in i:
-			new_tokens.append(Token(j[1],j[0]))
-	return new_tokens
-	'''
-
-	print (str)
+# if lexer is run directly, prints out tokens for each line
 if __name__ == '__main__':
-	run()
+	open_file(argv[1])
+	data = open_file(argv[1])
+	t_list = lex(data)
+	for i in range(len(t_list)):
+		print('line ', i, t_list[i])
