@@ -20,14 +20,14 @@ def lex(data):
 	tokenized = []
 
 	for i in range(len(data)-1):
-		tokenized.append(lex(data[i], (i+1)))
+		tokenized.append(lexify(data[i], (i+1)))
 
 	for i in range(len(tokenized)):
 		print('line ', i, tokenized[i])
 
 
 
-def lex(data, line_num):
+def lexify(data, line_num):
 	pos = 0
 	token_list = []
 	str = ''
@@ -69,7 +69,6 @@ def lex(data, line_num):
 						token_list.append(token)
 				break
 		if not match:
-			print('Illegal character in line',line_num,':', data,'at position %d' % pos)
 			sys.exit()
 		else:
 			pos = match.end(0)
