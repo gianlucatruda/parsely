@@ -2,6 +2,7 @@ import sys
 from sys import *
 import re
 import tokens
+import collections
 
 def open_file(filename):
 	data = open(filename, "r").read()
@@ -13,8 +14,8 @@ def run():
 	t_list = lex(data)
 	for i in range (len(t_list)):
 		print('line ', i+1, t_list[i])
-def lex(data):
 
+def lex(data):
 	pos = 0
 	token_list = []
 	str = ''
@@ -44,7 +45,7 @@ def lex(data):
 								sub_list.append((str, tag))
 								pos = match.end(0)
 								break
-							if state == 0: 
+							if state == 0:
 								break
 					if(tag == 'INT'):
 						#we want to strip leading zeros except if its '0'
@@ -63,8 +64,18 @@ def lex(data):
 			sys.exit()
 		else:
 				pos = match.end(0)
-	return token_list
-	
+
+	# coverts token_list to parser format Token(type='NUM', value='2')
+	Token = collections.namedtuple('Token', ['type','value'])
+	new_tokens = []
+
+	for i in token_list:
+		for j in i:
+			new_tokens.append(Token(j[1],j[0]))
+
+	return new_tokens
+	# return token_list
+
 
 
 	print (str)
