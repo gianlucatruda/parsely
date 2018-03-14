@@ -16,16 +16,29 @@ def run():
 		print('line ', i+1, t_list[i])
 
 def lex(data):
+	data = data.split('\n')
+	tokenized = []
+
+	for i in range(len(data)-1):
+		tokenized.append(lex(data[i], (i+1)))
+
+	for i in range(len(tokenized)):
+		print('line ', i, tokenized[i])
+
+
+
+def lex(data, line_num):
+>>>>>>> 00fb87b30a422e839a9cd846b469e50e6cec33da
 	pos = 0
 	token_list = []
 	str = ''
 	#state = 1 means everything we're looking at is part of string
 	state = 0
-	sub_list = []
+
 	while pos < len(data):
 		match = None
 		token_exprs = tokens.token_exprs
-		for i in range(len(token_exprs)):
+		for i in range(len(token_exprs)-2):
 			pattern, tag = token_exprs[i]
 			regex = re.compile(pattern)
 			match = regex.match(data, pos)
@@ -42,7 +55,7 @@ def lex(data):
 								regex = re.compile(pattern)
 								match = regex.match(data, pos+1)
 								str = match.group(0)
-								sub_list.append((str, tag))
+								token_list.append((str, tag))
 								pos = match.end(0)
 								break
 							if state == 0:
@@ -51,19 +64,16 @@ def lex(data):
 						#we want to strip leading zeros except if its '0'
 						if(len(str) > 1):
 							str = str.lstrip('0')
-					if (tag == 'ENDL'):
-						token_list.append(sub_list)
-						sub_list = []
 					#create a token - text and tag tuple
 					else:
 						token = (str, tag)
-						sub_list.append(token)
+						token_list.append(token)
 				break
 		if not match:
-			print('Illegal character: %s' % data[pos], data[pos:])
+			print('Illegal character in line',line_num,':', data,'at position %d' % pos)
 			sys.exit()
 		else:
-				pos = match.end(0)
+			pos = match.end(0)
 
 	# coverts token_list to parser format Token(type='NUM', value='2')
 	Token = collections.namedtuple('Token', ['type','value'])
@@ -72,10 +82,10 @@ def lex(data):
 	for i in token_list:
 		for j in i:
 			new_tokens.append(Token(j[1],j[0]))
-
-	return new_tokens
 	# return token_list
+	return new_tokens
 
+>>>>>>> 00fb87b30a422e839a9cd846b469e50e6cec33da
 
 
 	print (str)

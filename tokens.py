@@ -15,7 +15,6 @@ token_exprs = [
     #list of reserved words
     (r'\(',  RESERVED),
     (r'\)',  RESERVED),
-    (r';',   ENDL),
     (r'(\'|")', RESERVED),
     (r'PLUS',  RESERVED),
     (r'MINUS',   RESERVED),
