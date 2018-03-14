@@ -69,6 +69,7 @@ def lexify(data, line_num):
 						token_list.append(token)
 				break
 		if not match:
+			print('Illegal character in line',line_num,'at position',pos,':\n'+ data,'\n'+ ' '*(pos-1), '^')
 			sys.exit()
 		else:
 			pos = match.end(0)
