@@ -28,7 +28,6 @@ def lex(data):
 
 
 def lex(data, line_num):
->>>>>>> 00fb87b30a422e839a9cd846b469e50e6cec33da
 	pos = 0
 	token_list = []
 	str = ''
@@ -79,14 +78,14 @@ def lex(data, line_num):
 	Token = collections.namedtuple('Token', ['type','value'])
 	new_tokens = []
 
+	return token_list
+
+	'''
 	for i in token_list:
 		for j in i:
 			new_tokens.append(Token(j[1],j[0]))
-	# return token_list
 	return new_tokens
-
->>>>>>> 00fb87b30a422e839a9cd846b469e50e6cec33da
-
+	'''
 
 	print (str)
 if __name__ == '__main__':
