@@ -12,8 +12,7 @@ def run():
 	open_file(argv[1])
 	data = open_file(argv[1])
 	t_list = lex(data)
-	for i in range (len(t_list)):
-		print('line ', i+1, t_list[i])
+
 
 def lex(data):
 	data = data.split('\n')
