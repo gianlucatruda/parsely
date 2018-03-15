@@ -1,6 +1,6 @@
 2 PLUS 3 TIMES 4
 5 DIVIDE 3 MINUS 2
-8 PLUS 7 PLUS 3
+#8 PLUS 7 PLUS 3
 #the following doesn't all work yet
 #assign 4 to a
 #a EQUALS 0 PLUS 5
