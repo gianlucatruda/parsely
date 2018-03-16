@@ -1,5 +1,5 @@
 import re
-import g4_tokens as tokens
+import tokens
 import collections
 
 # Defines the Token data type used by the lexer and parser
@@ -105,11 +105,11 @@ class ExpressionTreeBuilder(ExpressionEvaluator):
 		else:
 			raise SyntaxError('Expected INT b')
 
-# if parser is run directly, it will default to file.g4 and print output
+# if parser is run directly, it will default to file.prsly and print output
 if __name__ == '__main__':
 	import g4_lexer as lexer
 	e = ExpressionTreeBuilder()
-	fname = "file.g4"
+	fname = "file.prsly"
 	data = lexer.open_file(fname)
 	toks = lexer.lex(data)
 	for line in toks:

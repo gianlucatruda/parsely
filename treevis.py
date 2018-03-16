@@ -21,7 +21,7 @@ class syntaxTreeMaker:
 		self.treefy(orig_tup)
 		self.dot.edges(self.edge_list)
 		self.dot.format = "png"
-		self.dot.render('syntax_tree'+str(count)+'.gv', view=True)
+		self.dot.render('output/'+str(count)+'_syntax.gv', view=True)
 
 	# Funky recursive tree generating function
 	def treefy(self, tup):
@@ -73,7 +73,7 @@ class parseTreeMaker:
 		self.treefy(orig_tup)
 		self.dot.edges(self.edge_list)
 		self.dot.format = "png"
-		self.dot.render('parse_tree_'+str(count)+'.gv', view=True)
+		self.dot.render('output/'+str(count)+'_parse.gv', view=True)
 
 	# Funky recursive tree generating function
 	def treefy(self, tup):

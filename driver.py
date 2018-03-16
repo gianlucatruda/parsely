@@ -2,23 +2,23 @@
 from sys import *
 
 # import our lexer and parser
-import g4_lexer as lexer
-import g4_parser as parser
+import parsely_lexer as lexer
+import parsely_parser as parser
 
 # import tree visualiser (only if you have all dependencies)
 visualise = False
 try:
-	import g4_treevis as vis
+	import treevis as vis
 	visualise = True
 except ImportError:
 	visualise = False
 
 # takes user input for filename, else compiles default file
-fname = "file.g4"
+fname = "file.prsly"
 if len(argv) == 2: # user gave exactly one filename
 	fname = argv[1]
 else: # user gave no parameters or more than one
-	print("No filename or invalid filename given, so using file.g4")
+	print("No filename or invalid filename given, so using file.prsly")
 
 # generate a "token stream" from lexer
 data = lexer.open_file(fname)

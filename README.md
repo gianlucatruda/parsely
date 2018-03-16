@@ -1,6 +1,7 @@
-# compilers1
+# PARSEly lexical and syntactic analyser
 
-<img src="https://i.imgur.com/2tvxofy.png" width="300px"></img>
+### e.g. 2 PLUS 3 TIMES 4
+<img src="samples/parse.png" width="300px"></img>
 
 ## Dependencies
 
@@ -8,6 +9,6 @@ To visualise, you need [graphviz](http://graphviz.readthedocs.io/en/stable/manua
 
 You can still run
 ```
-$python g4_compiler.py <file.g4>
+$python driver.py <file.prsly>
 ```
 even without the dependencies.

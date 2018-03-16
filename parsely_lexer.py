@@ -1,6 +1,6 @@
 from sys import *
 import re
-import g4_tokens as tokens
+import tokens
 import collections
 
 # Defines the Token data type used by the lexer and parser
