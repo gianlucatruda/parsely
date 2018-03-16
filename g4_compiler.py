@@ -8,7 +8,7 @@ import g4_parser as parser
 # import tree visualiser (only if you have all dependencies)
 visualise = False
 try:
-	import g4_visualiser as vis
+	import g4_treevis as vis
 	visualise = True
 except ImportError:
 	visualise = False
@@ -31,5 +31,7 @@ p = parser.ExpressionTreeBuilder()
 for key, line in enumerate(toks):
 	print(p.parse(line)) # prints the parsed code to terminal
 	if visualise: # only if all dependencies are available
-		tm = vis.treeMaker()
-		tm.generate(p.parse(toks[key]),key) # generates a .png of parse tree
+		stm = vis.syntaxTreeMaker()
+		stm.generate(p.parse(toks[key]),key) # generates a .png of syntax tree
+		ptm = vis.parseTreeMaker()
+		ptm.generate(p.parse(toks[key]),key) # generates a .png of parse tree
