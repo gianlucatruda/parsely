@@ -29,9 +29,9 @@ p = parser.ExpressionTreeBuilder()
 
 # pass "token stream" in line by line to parser
 for key, line in enumerate(toks):
-	print(p.parse(line)) # prints the parsed code to terminal
+	print(p.parse(line, key)) # prints the parsed code to terminal
 	if visualise: # only if all dependencies are available
 		stm = vis.syntaxTreeMaker()
-		stm.generate(p.parse(toks[key]),key) # generates a .png of syntax tree
+		stm.generate(p.parse(toks[key], key), key) # generates a .png of syntax tree
 		ptm = vis.parseTreeMaker()
-		ptm.generate(p.parse(toks[key]),key) # generates a .png of parse tree
+		ptm.generate(p.parse(toks[key], key), key) # generates a .png of parse tree
