@@ -16,16 +16,12 @@ token_exprs = [
     (r'[ \n\t]+', None),
     #comments
     (r'#[^\n]*',  None),
-    #list of reserved words
-    (r'\(',  RESERVED),
-    (r'\)',  RESERVED),
-    (r'(\'|")', RESERVED),
-    (r'PLUS',  PLUS),
-    (r'MINUS',   MINUS),
-    (r'TIMES',  TIMES),
-    (r'DIVIDE',   DIVIDE),
-    (r'EQUALS',   EQUALS),
-    (r'TALK_TO_THE_HAND', RESERVED),
+    #functions must start with an uppercase
+    (r'[P][lL][uU][sS]',  PLUS),
+    (r'[M][iI][nN][uU][sS]',   MINUS),
+    (r'[T][iI][mM][eE][sS]',  TIMES),
+    (r'[D][iI][vV][iI][dD][eE]',   DIVIDE),
+    (r'[E][qQ][uU][aA][lL][sS]',   EQUALS),
     (r'\d+', INT),
     #id must start lowercase
     (r'[a-z][A-Za-z0-9_]*', ID),
