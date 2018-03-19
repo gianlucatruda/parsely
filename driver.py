@@ -31,7 +31,9 @@ p = parser.ExpressionTreeBuilder()
 for key, line in enumerate(toks):
 	print(p.parse(line, key)) # prints the parsed code to terminal
 	if visualise: # only if all dependencies are available
+		# Generates a .png of syntax tree
 		stm = vis.syntaxTreeMaker()
-		stm.generate(p.parse(toks[key], key), key) # generates a .png of syntax tree
+		stm.generate(p.parse(toks[key], key), key)
+		# Generates a .png of parse tree
 		ptm = vis.parseTreeMaker()
-		ptm.generate(p.parse(toks[key], key), key) # generates a .png of parse tree
+		ptm.generate(p.parse(toks[key], key), key)
