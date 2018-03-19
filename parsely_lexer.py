@@ -13,7 +13,6 @@ def open_file(filename):
 def lex(data):
 	data = data.split('\n')
 	tokenized = []
-
 	for i in range(len(data)-1):
 		tokenized.append(lexify(data[i], (i+1)))
 
@@ -25,9 +24,7 @@ def lex(data):
 			for pair in line:
 				token_line.append(Token(pair[1], pair[0]))
 			token_list.append(token_line)
-
 	return token_list
-
 
 def lexify(data, line_num):
 	pos = 0
@@ -52,7 +49,10 @@ def lexify(data, line_num):
 							state = 0 if state == 1 else 1
 							#we found a string
 							if state == 1:
-								pattern, tag = token_exprs[len(token_exprs)-2] if str == '"' else token_exprs[len(token_exprs)-1]
+								if str == "":
+									pattern, tag = token_exprs[len(token_exprs)-2]
+								else:
+									token_exprs[len(token_exprs)-1]
 								regex = re.compile(pattern)
 								match = regex.match(data, pos+1)
 								str = match.group(0)
@@ -70,14 +70,17 @@ def lexify(data, line_num):
 					token_list.append(token)
 				break
 		if not match:
-			print('Illegal character in line',line_num,'at position',pos,':\n'+ data,'\n'+ ' '*(pos-1), '^')
+			print('Illegal character in line',line_num,'at position',pos,
+				':\n'+ data,'\n'+ ' '*(pos-1), '^')
 			sys.exit()
 		else:
 			pos = match.end(0)
-
 	return token_list
 
-# if lexer is run directly, prints out tokens for each line
+'''
+	if lexer is run directly, it will default to file.prsly
+	and print output to terminal.
+'''
 if __name__ == '__main__':
 	data = open_file('file.prsly')
 	t_list = lex(data)

@@ -7,44 +7,44 @@ import collections
 Token = collections.namedtuple('Token', ['type','value'])
 
 '''
-Implementation of a recursive descent parser. Each method
-implements a single grammar rule. Use the ._accept() method
-to test and accept the current lookahead token. Use the ._expect()
-method to exactly match and discard the next token on on the input
-(or raise a SyntaxError if it doesn't match).
+Implementation of a recursive descent parser, inspired by chapter
+2.19 of Python Cookbook (3rd Edition) by David Beazley and
+Brian K. Jones, but modified to fit a newly defined grammar.
 '''
 
 class ExpressionTreeBuilder():
 
 	def parse(self, tokline, line_num):
+		'Called once to begin the parsing on given tokens.'
 		self.line_num = line_num
 		self.tokens = tokline
-		self.tok = None # Last symbol consumed
-		self.nexttok = None # Next symbol tokenized
-		self._advance() # Load first lookahead token
+		self.tok = None # Last token
+		self.nexttok = None # Next token
+		self._advance() # Load next token
+		# Below code checks that line begins with INT as expected
 		if self.nexttok.type != 'INT':
-			print('Error on line', self.line_num,': Lines start with INT, but got', self.nexttok.type)
+			print('Error on line', self.line_num,
+				': Lines start with INT, but got', self.nexttok.type)
 			sys.exit()
 		return self.expr()
 
 	def _advance(self):
-		'Advance one token ahead'
+		'Advance the current and next tokens'
 		self.tok = self.nexttok
 		if len(self.tokens) > 0: # when there are tokens left
 			self.nexttok = self.tokens[0]
 			self.tokens = self.tokens[1:]
 
 	def _accept(self,toktype):
-		'Test and consume the next token if it matches toktype'
+		'Test (and consume) the next token if it matches token type'
 		if self.nexttok.type == toktype:
 			self._advance()
 			return True
 		else:
 			return False
 
-
 	def expr(self):
-		"expression ::= term { ('plus'|'minus') term }"
+		'EXP -> EXP PLUS TERM | EXP MINUS TERM | TERM'
 		exprval = self.term()
 		while self._accept('PLUS') or self._accept('MINUS'):
 			op = self.tok.type
@@ -56,7 +56,7 @@ class ExpressionTreeBuilder():
 		return exprval
 
 	def term(self):
-		"term ::= factor { ('times'|'divide') factor }"
+		'TERM -> TERM TIMES FACTOR | TERM DIVIDE FACTOR | FACTOR'
 		termval = self.factor()
 		while self._accept('TIMES') or self._accept('DIVIDE'):
 			op = self.tok.type
@@ -68,14 +68,18 @@ class ExpressionTreeBuilder():
 		return termval
 
 	def factor(self):
-		'factor ::= INT | ( expr )'
+		'FACTOR -> EXP | INT'
 		if self._accept('INT'):
 			return int(self.tok.value)
 		else:
-			print('Error on line', self.line_num,': After', self.tok.type ,'Expected an INT, but got', self.nexttok.type)
+			print('Error on line', self.line_num,': After',
+				self.tok.type ,'Expected an INT, but got', self.nexttok.type)
 			sys.exit()
 
-# if parser is run directly, it will default to file.prsly and print output
+'''
+	if parser is run directly, it will default to file.prsly
+	and print output to terminal.
+'''
 if __name__ == '__main__':
 	import parsely_lexer as lexer
 	e = ExpressionTreeBuilder()
