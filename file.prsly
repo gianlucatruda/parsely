@@ -1,8 +1,7 @@
-2 PLUS 3 TIMES 4
-5 DIVIDE 3 MINUS 2
-#8 PLUS 7 PLUS 3
-#the following doesn't all work yet
-#assign 4 to a
-#a EQUALS 0 PLUS 5
-#(sum EQUALS 15 MINUS (023 DIVIDE 91))
-#TALK_TO_THE_HAND 232
+# This should be accepted by both lexer and parser
+2 PLUS 4 TIMES 8 DIVIDE 2 MINUS 3
+# This should be rejected by lexer
+#2 PLUS %4 TIMES 8
+# These should be rejected by parser
+#2 PLUS 4 TIMES MINUS
+#PLUS 4 TIMES 3
