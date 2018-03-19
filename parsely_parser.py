@@ -77,8 +77,8 @@ class ExpressionTreeBuilder():
 			sys.exit()
 
 '''
-	if parser is run directly, it will default to file.prsly
-	and print output to terminal.
+if parser is run directly, it will default to file.prsly
+and print output to terminal.
 '''
 if __name__ == '__main__':
 	import parsely_lexer as lexer

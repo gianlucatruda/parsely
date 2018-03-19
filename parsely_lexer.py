@@ -78,8 +78,8 @@ def lexify(data, line_num):
 	return token_list
 
 '''
-	if lexer is run directly, it will default to file.prsly
-	and print output to terminal.
+if lexer is run directly, it will default to file.prsly
+and print output to terminal.
 '''
 if __name__ == '__main__':
 	data = open_file('file.prsly')
