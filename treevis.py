@@ -2,15 +2,21 @@ from graphviz import Digraph
 import string
 
 '''
-This class is used to produce syntax trees.
+This file contains two classes:
+	(1) a recursive SYNTAX tree maker
+	(2) a recursive PARSE tree maker
+that both use graphviz's Digraph functionality
+to render outputs of the parsed lines.
 '''
-class syntaxTreeMaker:
 
+
+class syntaxTreeMaker:
+	'This class is used to produce syntax trees.'
 	# class instantiation variables
 	def __init__(self):
 		self.edge_list = []
 		self.dot = Digraph(comment="")
-		# list of uppercase alphabet so nodes generator can use preferred naming
+		# list of uppercase alphabet so nodes generator can uniquely name
 		self.alpha = []
 		for s in string.ascii_uppercase:
 			self.alpha.append(s)
@@ -20,6 +26,8 @@ class syntaxTreeMaker:
 		self.dot = Digraph(comment=str(orig_tup))
 		self.treefy(orig_tup)
 		self.dot.edges(self.edge_list)
+		self.fig_title = r"\n\nSyntax tree for\n"+str(orig_tup)
+		self.dot.attr(label=self.fig_title)
 		self.dot.format = "png"
 		self.dot.render('output/'+str(count)+'_syntax.gv', view=True)
 
@@ -53,16 +61,13 @@ class syntaxTreeMaker:
 
 		return (p, n_p)
 
-'''
-This class is used to produce parse trees.
-'''
 class parseTreeMaker:
-
+	'This class is used to produce parse trees.'
 	# class instantiation variables
 	def __init__(self):
 		self.edge_list = []
 		self.dot = Digraph(comment="")
-		# list of uppercase alphabet so nodes generator can use preferred naming
+		# list of uppercase alphabet so nodes generator can uniquely name
 		self.alpha = []
 		for s in string.ascii_uppercase:
 			self.alpha.append(s)
@@ -72,6 +77,8 @@ class parseTreeMaker:
 		self.dot = Digraph(comment=str(orig_tup))
 		self.treefy(orig_tup)
 		self.dot.edges(self.edge_list)
+		self.fig_title = r"\n\nParse tree for line\n"+str(orig_tup)
+		self.dot.attr(label=self.fig_title)
 		self.dot.format = "png"
 		self.dot.render('output/'+str(count)+'_parse.gv', view=True)
 
