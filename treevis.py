@@ -92,6 +92,8 @@ class parseTreeMaker:
 			parse_type = 'term'
 		elif op == 'plus' or op == 'minus':
 			parse_type = 'expression'
+		elif op == 'equals':
+			parse_type = 'assign'
 		n_op = self.alpha.pop()
 		lc = tup[1]
 		rc = tup[2]
