@@ -13,7 +13,8 @@ to test and accept the current lookahead token. Use the ._expect()
 method to exactly match and discard the next token on on the input
 (or raise a SyntaxError if it doesn't match).
 '''
-class ExpressionEvaluator:
+
+class ExpressionTreeBuilder():
 
 	def parse(self, tokline, line_num):
 		self.line_num = line_num
@@ -41,12 +42,6 @@ class ExpressionEvaluator:
 		else:
 			return False
 
-	# def _expect(self,toktype):
-	# 	'Consume next token if it matches toktype or raise SyntaxError'
-	# 	if not self._accept(toktype):
-	# 		raise SyntaxError('Expected ' + toktype)
-
-class ExpressionTreeBuilder(ExpressionEvaluator):
 
 	def expr(self):
 		"expression ::= term { ('plus'|'minus') term }"
