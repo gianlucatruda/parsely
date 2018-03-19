@@ -1,5 +1,7 @@
 # This should be accepted by both lexer and parser
 2 PLUS 4 TIMES 8 DIVIDE 2 MINUS 3
+test_ID EQUALS 3 PLUS 4 DIVIDE 21
+my_Val EQUALS 15 TIMES 7 PLUS 99 DIVIDE test_ID
 # This should be rejected by lexer
 #2 PLUS %4 TIMES 8
 # These should be rejected by parser

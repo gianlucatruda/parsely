@@ -24,7 +24,7 @@ token_exprs = [
     (r'MINUS',   MINUS),
     (r'TIMES',  TIMES),
     (r'DIVIDE',   DIVIDE),
-    (r'EQUALS',   RESERVED),
+    (r'EQUALS',   EQUALS),
     (r'TALK_TO_THE_HAND', RESERVED),
     (r'\d+', INT),
     #id must start lowercase

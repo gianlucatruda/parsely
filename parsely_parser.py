@@ -23,9 +23,12 @@ class ExpressionTreeBuilder():
 		self._advance() # Load next token
 		# Below code checks that line begins with INT as expected
 		if self.nexttok.type != 'INT':
-			print('Error on line', self.line_num,
-				': Lines start with INT, but got', self.nexttok.type)
-			sys.exit()
+			if not self.nexttok.type == 'ID':
+				print('Error on line', self.line_num,
+					': Lines start with INT, but got', self.nexttok.type)
+				sys.exit()
+			else:
+				return self.assign()
 		return self.expr()
 
 	def _advance(self):
@@ -42,6 +45,14 @@ class ExpressionTreeBuilder():
 			return True
 		else:
 			return False
+
+	def assign(self):
+		'ASSIGN -> ID EQUALS EXP'
+		val = self.nexttok.value
+		if self._accept('ID'):
+			if self._accept('EQUALS'):
+				exp = self.expr()
+				return ('equals', val, exp)
 
 	def expr(self):
 		'EXP -> EXP PLUS TERM | EXP MINUS TERM | TERM'
@@ -68,9 +79,11 @@ class ExpressionTreeBuilder():
 		return termval
 
 	def factor(self):
-		'FACTOR -> EXP | INT'
+		'FACTOR -> EXP | INT | ID'
 		if self._accept('INT'):
 			return int(self.tok.value)
+		elif self._accept('ID'):
+			return self.tok.value
 		else:
 			print('Error on line', self.line_num,': After',
 				self.tok.type ,'Expected an INT, but got', self.nexttok.type)
