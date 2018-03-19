@@ -1,4 +1,4 @@
-from sys import *
+import sys
 import re
 import tokens
 import collections
@@ -79,8 +79,7 @@ def lexify(data, line_num):
 
 # if lexer is run directly, prints out tokens for each line
 if __name__ == '__main__':
-	open_file(argv[1])
-	data = open_file(argv[1])
+	data = open_file('file.prsly')
 	t_list = lex(data)
 	for i in range(len(t_list)):
 		print('line ', i, t_list[i])
