@@ -1,12 +1,13 @@
 # These should be accepted by both lexer and parser
-#quick_mafs EQUALS 2 PLUS 2 MINUS 1
-#test_ID EQUALS 3 PLUS 4 DIVIDE 21
-#my_Val Equals 15 TIMeS 7 PLUS 99 DIvide test_ID
+quick_mafs EQUALS 1 PLUS 2 DIVIDE 3
+test_ID EQUALS 3 PLUS 4 DIVIDE 21
+my_Val Equals 15 TIMeS 7 PLUS 99 DIvide test_ID
 
-# These should be rejected by lexer
+#These should be rejected by lexer
 #2 PLUS %4 TIMES 8
-#2 plus 4 Times 8
+#2 plus SEVEN
 
 # These should be rejected by parser
 #2 PLUS 4 TIMES MINUS
 #Plus 4 TIMES 3
+2 plus 2

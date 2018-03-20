@@ -37,22 +37,33 @@ class ExpressionTreeBuilder():
 		if len(self.tokens) > 0: # when there are tokens left
 			self.nexttok = self.tokens[0]
 			self.tokens = self.tokens[1:]
+		else:
+			self.nexttok = Token('None', 'null')
 
 	def _accept(self,toktype):
 		'Test (and consume) the next token if it matches token type'
-		if self.nexttok.type == toktype:
-			self._advance()
-			return True
+		if self.nexttok:
+			if self.nexttok.type == toktype:
+				self._advance()
+				return True
+			else:
+				return False
 		else:
 			return False
 
 	def assign(self):
 		'ASSIGN -> ID EQUALS EXP'
 		val = self.nexttok.value
+
 		if self._accept('ID'):
 			if self._accept('EQUALS'):
 				exp = self.expr()
 				return ('equals', val, exp)
+		else:
+			print('Error after',
+				self.tok.type ,': Expected an OPERATOR, but got',
+				self.nexttok.type)
+			sys.exit()
 
 	def expr(self):
 		'EXP -> EXP PLUS TERM | EXP MINUS TERM | TERM'
@@ -80,10 +91,15 @@ class ExpressionTreeBuilder():
 
 	def factor(self):
 		'FACTOR -> EXP | INT | ID'
-		if self._accept('INT'):
+		if self._accept('INT') and not (self.nexttok.type == 'INT' or self.nexttok.type == 'ID'):
 			return int(self.tok.value)
-		elif self._accept('ID'):
+		elif self._accept('ID') and not (self.nexttok.type == 'INT' or self.nexttok.type == 'ID'):
 			return self.tok.value
+		elif (self.tok.type == 'INT' or self.tok.type == 'ID') and (self.nexttok.type == 'INT' or self.nexttok.type == 'ID'):
+			print('Error after',
+				self.tok.type ,': Expected an OPERATOR, but got',
+				self.nexttok.type)
+			sys.exit()
 		else:
 			print('Error after',
 				self.tok.type ,': Expected an INT or ID, but got',

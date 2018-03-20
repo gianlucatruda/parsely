@@ -23,7 +23,6 @@ else: # user gave no parameters or more than one
 # generate a "token stream" from lexer
 data = lexer.open_file(fname)
 toks = lexer.lex(data)
-
 # instantiate a parser
 p = parser.ExpressionTreeBuilder()
 
