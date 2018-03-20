@@ -24,8 +24,8 @@ class ExpressionTreeBuilder():
 		# Below code checks that line begins with INT as expected
 		if self.nexttok.type != 'INT':
 			if not self.nexttok.type == 'ID':
-				print('Error on line', self.line_num,
-					': Lines start with INT, but got', self.nexttok.type)
+				print('Error: Lines start with INT or ID, but got',
+					self.nexttok.type)
 				sys.exit()
 			else:
 				return self.assign()
@@ -85,8 +85,9 @@ class ExpressionTreeBuilder():
 		elif self._accept('ID'):
 			return self.tok.value
 		else:
-			print('Error on line', self.line_num,': After',
-				self.tok.type ,'Expected an INT, but got', self.nexttok.type)
+			print('Error after',
+				self.tok.type ,': Expected an INT or ID, but got',
+				self.nexttok.type)
 			sys.exit()
 
 '''
