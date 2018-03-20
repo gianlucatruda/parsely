@@ -17,11 +17,11 @@ token_exprs = [
     #comments
     (r'#[^\n]*',  None),
     #functions must start with an uppercase
-    (r'[P][lL][uU][sS]',  PLUS),
-    (r'[M][iI][nN][uU][sS]',   MINUS),
-    (r'[T][iI][mM][eE][sS]',  TIMES),
-    (r'[D][iI][vV][iI][dD][eE]',   DIVIDE),
-    (r'[E][qQ][uU][aA][lL][sS]',   EQUALS),
+    (r'[Pp][lL][uU][sS]',  PLUS),
+    (r'[Mm][iI][nN][uU][sS]',   MINUS),
+    (r'[Tt][iI][mM][eE][sS]',  TIMES),
+    (r'[Dd][iI][vV][iI][dD][eE]',   DIVIDE),
+    (r'[Ee][qQ][uU][aA][lL][sS]',   EQUALS),
     (r'\d+', INT),
     #id must start lowercase
     (r'[a-z][A-Za-z0-9_]*', ID),
