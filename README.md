@@ -1,7 +1,12 @@
-# PARSEly lexical and syntactic analyser
+# Parsely lexical and syntactic analyser
 
-### e.g. 2 PLUS 3 TIMES 4
-<img src="samples/parse.png" width="300px"></img>
+Truda G, Toyer Z, Moolla T, Murray J, Sprung B
+
+<p align="center">
+	<img src="samples/parse.png" width="300px"></img>
+	<img src="logo.png" width="200px"></img>
+</p>
+
 
 ## Dependencies
 
