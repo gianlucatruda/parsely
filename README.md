@@ -2,6 +2,8 @@
 
 Truda G, Toyer Z, Moolla T, Murray J, Sprung B
 
+Read the [full whitepaper](http://bit.ly/parselyPaper)
+
 <p align="center">
 	<img src="samples/parse.png" width="300px"></img>
 	<img src="logo.png" width="200px"></img>
